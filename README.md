@@ -404,6 +404,20 @@ $ git switch -c dev    # 创建并切换到新的dev分支
 $ git switch master    # 直接切换到已有的master分支
 ```
 
+#### dev分支上传到远程仓库
+```powershell
+$ git push --set-upstream origin test-br
+
+### 输出情况：
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'test-br' on GitHub by visiting:    # 远程仓库上创建一个新的分支
+remote:      https://github.com/Brand-Frank/learn-git/pull/new/test-br
+remote:
+To https://github.com/Brand-Frank/learn-git.git
+ * [new branch]      test-br -> test-br
+branch 'test-br' set up to track 'origin/test-br'.
+```
 #### 分支管理总结
 ```powershell
 # 查看分支
