@@ -139,3 +139,6 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 ```
 
 ## 工作区和暂存区
+![工作区和暂存区](F:\images-temp\git-2.jfif)
+- `git add`把**文件修改**添加到暂存区；
+- `git commit`把暂存区的所有内容提交到当前分支。
