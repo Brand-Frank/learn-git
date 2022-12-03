@@ -181,4 +181,8 @@ git checkout -- hello-git.txt    #把hello-git文件在工作区的修改全部�
 ```powershell
 git reset HEAD hello-git.txt    #git reset可以回退版本，也可以把暂存区的修改回退到工作区
 git checkout -- hello-git.txt    #丢弃工作区的修改
+
+# Note 廖老师的可能有点问题，实验时没有复现出来，尝试使用下面的命令，成功！
+git reset --hard HEAD^
 ```
+
