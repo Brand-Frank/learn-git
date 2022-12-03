@@ -281,6 +281,7 @@ git clone https://github.com/Brand-Frank/learn-git.git
 
 ### 创建与合并分支
 [分支详细讲解](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)
+- **这里的`master`应当为`main`，但是为了与这里的图片匹配，都用`master`来表示了，但是`master`应为种族歧视问题已经在2020年开始弃用了，创建的默认分支均为`main`分支**
 > 截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是指向`master`，`master`才是指向提交的，所以，`HEAD`指向的就是**当前分支**。
 
 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`指向`master`，就能确定当前分支，以及当前分支的提交点：
@@ -339,6 +340,18 @@ $ git commit -m "branch test"
 ```powershell
 git checkout main
 ```
+切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变:
+![git-br-on-master](images/git-br-on-master.png)
+
+#### 合并分支(dev)到主分支(main)
+```powershell
+git merge dev    # 合并指定分支到当前分支
+```
+合并后，再查看`readme.txt`的内容，就可以看到，和`dev`分支的最新提交是完全一样的。注意到上面的*Fast-forward*信息，Git告诉我们，这次合并是“**快进模式**”，也就是直接把`master`指向`dev`的当前提交，所以合并速度非常快。
+
+#### 删除分支(dev)
+
+
 
 ### 解决冲突
 ### 分支管理策略
