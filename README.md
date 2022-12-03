@@ -142,3 +142,11 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 ![工作区和暂存区](F:\images-temp\git-2.jfif)
 - `git add`把**文件修改**添加到暂存区；
 - `git commit`把暂存区的所有内容提交到当前分支。
+
+## Git只追踪修改，而非文件
+实验例程参考[廖雪峰的网站](https://www.liaoxuefeng.com/wiki/896043488029600/897884457270432)
+
+## 查看工作区和版本库里最新版本的区别
+```powershell
+git diff HEAD -- hello-git.txt
+```
