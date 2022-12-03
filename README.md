@@ -346,13 +346,15 @@ git checkout main
 切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变:
 ![git-br-on-master](images/git-br-on-master.png)
 
-- 切换到不同分支时，在不同分支上提交的信息(commit id)只能在各自分支上看到，除非合并分支，合并后的分支能够把被合并分支的commit信息合并到本分支。
+- **切换到不同分支时，在不同分支上提交的信息(`commit id`)只能在各自分支上看到，除非合并分支，合并后的分支能够把被合并分支的`commit`信息合并到本分支。并且commit信息会显示对那个对应分支的标签**
+
+![git-br-checkout](images/git-br-checkout.png)
 
 #### 合并分支(dev)到主分支(main)
 ```powershell
 git merge dev    # 合并指定分支到当前分支
 
-### 输出情况
+### 输出情况：
 Updating 5e1405a..3b3891f
 Fast-forward
  README.md                   |  30 +++++++++++++++++++++++++++++-
@@ -360,6 +362,18 @@ Fast-forward
  images/git-br-on-master.png | Bin 0 -> 7317 bytes
  3 files changed, 31 insertions(+), 2 deletions(-)
  create mode 100644 images/git-br-on-master.png
+```
+
+```powershell
+git checkout -b test-br
+## editing
+git merge test-br
+
+### 输出情况：
+Updating 3b3891f..217a49c
+Fast-forward
+ README.md | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 ```
 
 合并后，再查看`readme.txt`的内容，就可以看到，和`dev`分支的最新提交是完全一样的。注意到上面的*Fast-forward*信息，Git告诉我们，这次合并是“**快进模式**”，也就是直接把`master`指向`dev`的当前提交，所以合并速度非常快。
