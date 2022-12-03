@@ -346,6 +346,8 @@ git checkout main
 切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变:
 ![git-br-on-master](images/git-br-on-master.png)
 
+- 切换到不同分支时，在不同分支上提交的信息(commit id)只能在各自分支上看到，除非合并分支，合并后的分支能够把被合并分支的commit信息合并到本分支。
+
 #### 合并分支(dev)到主分支(main)
 ```powershell
 git merge dev    # 合并指定分支到当前分支
