@@ -150,3 +150,35 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 ```powershell
 git diff HEAD -- hello-git.txt
 ```
+输出内容：
+```powershell
+PS E:\CSB\Git\learn-git> git diff HEAD -- hello-git.txt
+diff --git a/hello-git.txt b/hello-git.txt
+index 56b2aa4..053de74 100644
+--- a/hello-git.txt
++++ b/hello-git.txt
+@@ -2,4 +2,5 @@ Git is a version control system.
+ Git is free software.
+ Git has a mutable index called stage.
+
+-Git tracks changes, but not files.
+\ No newline at end of file
++Git tracks changes, but not files.
++Git tracks changes of files.
+\ No newline at end of file
+PS E:\CSB\Git\learn-git> git add --all
+PS E:\CSB\Git\learn-git> git commit -m "OK"
+```
+
+## 丢弃工作区的修改
+```powershell
+git checkout -- hello-git.txt    #把hello-git文件在工作区的修改全部撤销，而且此时工作区的修改没有添加到暂存区(add)
+```
+- 一种是`hello-git.txt`*自修改后还没有被放到暂存区*，现在，撤销修改就回到**和版本库一模一样的状态**；
+- 一种是`hello-git.txt`*已经添加到暂存区后，又作了修改*，现在，撤销修改就回到**添加到暂存区后的状态**。
+
+- 已经`git add`到暂存区了：`My stupid boss still prefers SVN.`, `git add hello-git.txt`
+```powershell
+git reset HEAD hello-git.txt    #git reset可以回退版本，也可以把暂存区的修改回退到工作区
+git checkout -- hello-git.txt    #丢弃工作区的修改
+```
