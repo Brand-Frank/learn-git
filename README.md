@@ -5,40 +5,72 @@
 - [廖雪峰的博客](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [GitHub Docs](https://docs.github.com/cn)
 
-## 初始化账户
+- [Git简介](#Git简介)
+  - [初始化账户](#初始化账户)
+  - [初始化版本库](#初始化版本库)
+  - [添加文件](#添加文件)
+  - [查看状态](#查看状态)
+  - [编辑文件，查看区别](#编辑文件，查看区别)
+  - [再次提交与查看状态](#再次提交与查看状态)
+  - [查看日志](#查看日志)
+
+- [Git本地仓库管理](#Git本地仓库管理)
+  - [退回到上一个版本](#退回到上一个版本)
+  - [退回到未来的版本](#退回到未来的版本)
+  - [工作区和暂存区](#工作区和暂存区)
+  - [Git只追踪修改，而非文件](#Git只追踪修改，而非文件)
+  - [查看工作区和版本库里最新版本的区别](#查看工作区和版本库里最新版本的区别)
+  - [丢弃工作区的修改](#丢弃工作区的修改)
+- [远程仓库](#远程仓库)
+  - [本地仓库与远程仓库建立关联](#本地仓库与远程仓库建立关联)
+  - [推送至远程仓库](#推送至远程仓库)
+  - [丢弃工作区的修改](#丢弃工作区的修改)
+  - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
+  - [从远程仓库克隆到本地](#从远程仓库克隆到本地)
+- [分支管理](#分支管理)
+  - [本地仓库与远程仓库建立关联](#本地仓库与远程仓库建立关联)
+  - [推送至远程仓库](#推送至远程仓库)
+  - [丢弃工作区的修改](#丢弃工作区的修改)
+  - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
+  - [从远程仓库克隆到本地](#从远程仓库克隆到本地)
+
+
+
+## Git简介
+### 初始化账户
 ```powershell
 # 初始化账户
 git config --global user.name "Brand-Frank"
 git config --global user.email "123456789@qq.com"
 ```
 
-## 初始化版本库
+### 初始化版本库
 ```powershell
 git init
 ```
 
-## 添加文件
+### 添加文件
 ```powershell
 git add hello-git.txt
 ```
 
-## 查看状态
+### 查看状态
 ```powershell
 git status
 ```
 
-## 编辑文件，查看区别
+### 编辑文件，查看区别
 ```powershell
 git diff    #需要在git add之前查看，add之后看不到不同之处
 ```
 
-## 再次提交与查看状态
+### 再次提交与查看状态
 ```powershell
 git add .
 git status
 ```
 
-## 查看日志
+### 查看日志
 ```powershell
 git log
 ```
@@ -95,7 +127,8 @@ cd9255a9d6041daf8979aa228e4fb846e0e97baf Initial commit
 ```
 - `7c4bd2b3f63e63990b657f7ce67cd035c40e2dc5`为`commit id`（版本号），是由SHA1计算出来的一个非常大的数字，十六进制表示
 
-## 退回到上一个版本
+## Git本地仓库管理
+### 退回到上一个版本
 - Git中，用`HEAD`来表示当前版本，也就是最新提交的`7c4bd2b3f63e63990b657f7ce67cd035c40e2dc5`，上一个版本是`HEAD^`，再上一个版本是`HEAD^^`，较多`^`时，写作`HEAD~100`，往前数的第一百个版本。
 
 ```powershell
@@ -119,7 +152,7 @@ git reset --hard 7c4bd    #不用写全commit id，git会自动寻找
 <p style="text-align:center; color:purple; padding:1px; border:1px solid black">Note: git 工作原理</p>
 <img src="images/git-1.png" alt="git-1.png" style="width:auto; border:1px solid black">
 
-## 退回到未来的版本
+### 退回到未来的版本
 在Git中，总是有后悔药可以吃的。当你用`git reset --hard HEAD^`回退到<em><strong>add distributed</strong></em>版本时，再想恢复到**append GPL**，就必须找到**append GPL**的`commit id`。Git提供了一个命令`git reflog`用来**记录你的每一次命令**：
 ```powershell
 PS E:\CSB\Git\learn-git> git reflog
@@ -138,15 +171,15 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 30d25aa (origin/main, origin/HEAD) HEAD@{12}: clone: from https://github.com/Brand-Frank/learn-git.git
 ```
 
-## 工作区和暂存区
+### 工作区和暂存区
 ![工作区和暂存区](images/git-2.jfif)
 - `git add`把**文件修改**添加到暂存区；
 - `git commit`把暂存区的所有内容提交到当前分支。
 
-## Git只追踪修改，而非文件
+### Git只追踪修改，而非文件
 实验例程参考[廖雪峰的网站](https://www.liaoxuefeng.com/wiki/896043488029600/897884457270432)
 
-## 查看工作区和版本库里最新版本的区别
+### 查看工作区和版本库里最新版本的区别
 ```powershell
 git diff HEAD -- hello-git.txt
 ```
@@ -170,7 +203,7 @@ PS E:\CSB\Git\learn-git> git add --all
 PS E:\CSB\Git\learn-git> git commit -m "OK"
 ```
 
-## 丢弃工作区的修改
+### 丢弃工作区的修改
 ```powershell
 git checkout -- hello-git.txt    #把hello-git文件在工作区的修改全部撤销，而且此时工作区的修改没有添加到暂存区(add)
 ```
@@ -186,16 +219,20 @@ git checkout -- hello-git.txt    #丢弃工作区的修改
 git reset --hard HEAD^
 ```
 
-## 本地仓库与远程仓库建立关联
+## 远程仓库
+### 本地仓库与远程仓库建立关联
 ```powershell
 git remote add origin git@github.com:Brand-Frank/learn-git.git    # SSH
 # or
 git remote add origin https://github.com/Brand-Frank/learn-git.git    #HTTPS
 ```
 
-## 推送至远程仓库
+### 推送至远程仓库
 ```powershell
 $ git push
+```
+输出情况：
+```powershell
 Enumerating objects: 41, done.
 Counting objects: 100% (41/41), done.
 Delta compression using up to 16 threads
@@ -206,3 +243,44 @@ remote: Resolving deltas: 100% (17/17), done.
 To https://github.com/Brand-Frank/learn-git.git
    30d25aa..cea6148  main -> main
 ```
+- 增加两张本地链接的图片
+```powershell
+$ git push origin main
+```
+输出情况：
+```powershell
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 76.02 KiB | 25.34 MiB/s, done.
+Total 8 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 2 local objects.
+To https://github.com/Brand-Frank/learn-git.git
+   cea6148..b7d80a6  main -> main
+```
+
+### 删除与远程仓库的绑定关系
+> 如果添加的时候远程仓库地址写错了，或者就是想删除远程仓库们可以用`git remote rm <name>`命令，使用前，建议先用`git remote -v`查看远程仓库信息：
+> - <p style="font-size:1.2rem; background-color:yellow">注意：</p>这里的删除其实是接触本地和远程的绑定关系，并不是物理上删除远程库。远程库本身并没有变动。要真正删除远程库，需要登陆到GitHub，在后台页面找到删除按钮再删除。
+
+```powershell
+git remote -v
+###
+origin  https://github.com/Brand-Frank/learn-git.git (fetch)
+origin  https://github.com/Brand-Frank/learn-git.git (push)
+```
+
+### 从远程仓库克隆到本地
+```powershell
+git clone https://github.com/Brand-Frank/learn-git.git
+```
+
+## 分支管理
+
+### 
+
+
+
+
+## 标签管理
