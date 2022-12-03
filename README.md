@@ -186,3 +186,9 @@ git checkout -- hello-git.txt    #丢弃工作区的修改
 git reset --hard HEAD^
 ```
 
+## 本地仓库与远程仓库建立关联
+```powershell
+git remote add origin git@github.com:Brand-Frank/learn-git.git    # SSH
+# or
+git remote add origin https://github.com/Brand-Frank/learn-git.git    #HTTPS
+```
