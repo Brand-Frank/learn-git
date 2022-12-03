@@ -115,3 +115,27 @@ cd9255a9d6041daf8979aa228e4fb846e0e97baf Initial commit
 ```powershell
 git reset --hard 7c4bd    #不用写全commit id，git会自动寻找
 ```
+
+<p style="text-align:center; color:purple; padding:1px; border:1px solid black">Note: git 工作原理</p>
+<img src="F:\images-temp\git-1.png" alt="git-1.png" style="width:auto; border:1px solid black">
+
+## 退回到未来的版本
+在Git中，总是有后悔药可以吃的。当你用`git reset --hard HEAD^`回退到<em><strong>add distributed</strong></em>版本时，再想恢复到**append GPL**，就必须找到**append GPL**的`commit id`。Git提供了一个命令`git reflog`用来**记录你的每一次命令**：
+```powershell
+PS E:\CSB\Git\learn-git> git reflog
+0dc07a4 (HEAD -> main) HEAD@{0}: commit: hello here
+d7b2209 HEAD@{1}: reset: moving to HEAD^^
+f1ef8f3 HEAD@{2}: reset: moving to HEAD^
+7c4bd2b HEAD@{3}: reset: moving to 7c4bd
+cfd4505 HEAD@{4}: reset: moving to HEAD^
+422de07 HEAD@{5}: commit: add a note
+cfd4505 HEAD@{6}: commit: Retry again
+f1ef8f3 HEAD@{7}: reset: moving to HEAD^
+7c4bd2b HEAD@{8}: commit: append GPL
+f1ef8f3 HEAD@{9}: commit: add distributed
+06b98ed HEAD@{10}: commit: add a file.
+d7b2209 HEAD@{11}: commit: wrote a hello-git file.
+30d25aa (origin/main, origin/HEAD) HEAD@{12}: clone: from https://github.com/Brand-Frank/learn-git.git
+```
+
+## 工作区和暂存区
