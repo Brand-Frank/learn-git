@@ -117,7 +117,7 @@ git reset --hard 7c4bd    #不用写全commit id，git会自动寻找
 ```
 
 <p style="text-align:center; color:purple; padding:1px; border:1px solid black">Note: git 工作原理</p>
-<img src="F:\images-temp\git-1.png" alt="git-1.png" style="width:auto; border:1px solid black">
+<img src="images/git-1.png" alt="git-1.png" style="width:auto; border:1px solid black">
 
 ## 退回到未来的版本
 在Git中，总是有后悔药可以吃的。当你用`git reset --hard HEAD^`回退到<em><strong>add distributed</strong></em>版本时，再想恢复到**append GPL**，就必须找到**append GPL**的`commit id`。Git提供了一个命令`git reflog`用来**记录你的每一次命令**：
@@ -139,7 +139,7 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 ```
 
 ## 工作区和暂存区
-![工作区和暂存区](F:\images-temp\git-2.jfif)
+![工作区和暂存区](images/git-2.jfif)
 - `git add`把**文件修改**添加到暂存区；
 - `git commit`把暂存区的所有内容提交到当前分支。
 
@@ -191,4 +191,18 @@ git reset --hard HEAD^
 git remote add origin git@github.com:Brand-Frank/learn-git.git    # SSH
 # or
 git remote add origin https://github.com/Brand-Frank/learn-git.git    #HTTPS
+```
+
+## 推送至远程仓库
+```powershell
+$ git push
+Enumerating objects: 41, done.
+Counting objects: 100% (41/41), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (35/35), done.
+Writing objects: 100% (39/39), 5.69 KiB | 1.90 MiB/s, done.
+Total 39 (delta 17), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (17/17), done.
+To https://github.com/Brand-Frank/learn-git.git
+   30d25aa..cea6148  main -> main
 ```
