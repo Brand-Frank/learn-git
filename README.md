@@ -28,7 +28,8 @@
   - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
   - [从远程仓库克隆到本地](#从远程仓库克隆到本地)
 - [分支管理](#分支管理)
-  - [本地仓库与远程仓库建立关联](#本地仓库与远程仓库建立关联)
+  - [创建与合并分支](#创建与合并分支)
+    - [创建dev分支](#创建dev分支)
   - [推送至远程仓库](#推送至远程仓库)
   - [丢弃工作区的修改](#丢弃工作区的修改)
   - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
@@ -277,6 +278,61 @@ git clone https://github.com/Brand-Frank/learn-git.git
 ```
 
 ## 分支管理
+
+### 创建与合并分支
+[分支详细讲解](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)
+> 截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是指向`master`，`master`才是指向提交的，所以，`HEAD`指向的就是**当前分支**。
+
+一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`指向`master`，就能确定当前分支，以及当前分支的提交点：
+
+![git-br-initial](images/git-br-initial.png)
+
+每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。
+**当我们创建新的分支，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上**：
+
+![git-br-create](images/git-br-create.png)
+
+Git创建一个分支很快，因为除了**增加一个`dev`指针**，**改改`HEAD`的指向**，**工作区的文件都没有任何变化**！
+
+不过，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
+![git-br-dev-fd](images/git-br-dev-fd.png)
+
+假如我们在dev上的工作完成了，就可以把`dev`合并到`master`上。Git怎么合并呢？最简单的方法，就是直接把`master`指向`dev`的当前提交，就完成了合并：
+
+![git-br-ff-merge](images/git-br-ff-merge.png)
+
+所以Git合并分支也很快！就改改指针，工作区内容也不变！
+
+合并完分支后，甚至可以删除`dev`分支。删除dev分支就是把dev指针给删掉，删掉后，我们就剩下了一条`master`分支：
+
+![git-br-rm](images/git-br-rm.png)
+
+#### 创建dev分支
+```powershell
+## method-1
+git branch dev    # 创建dev分支
+git checkout dev    # 切换到dev分支
+
+## method-2
+git checkout -b dev    #创建并切换到dev分支
+```
+
+#### 列出所有分支
+```powershell
+$ git branch
+###
+  dev
+* mai
+```
+
+### 解决冲突
+### 分支管理策略
+### Bug分支
+### Feature分支
+### 多人协作
+### Rebase
+
+
 
 ### 
 
