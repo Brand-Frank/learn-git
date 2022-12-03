@@ -320,6 +320,9 @@ M       README.md
 ## method-2
 git checkout -b dev    #创建并切换到dev分支
 #Note 这里不能复现廖老师的实验，所以建议用上面的方法创建并切换至dev分支
+## 更新：这种方式能够复现:
+$ git checkout -b test-br
+Switched to a new branch 'test-br'
 ```
 
 #### 列出所有分支
@@ -346,7 +349,17 @@ git checkout main
 #### 合并分支(dev)到主分支(main)
 ```powershell
 git merge dev    # 合并指定分支到当前分支
+
+### 输出情况
+Updating 5e1405a..3b3891f
+Fast-forward
+ README.md                   |  30 +++++++++++++++++++++++++++++-
+ hello-git.txt               |   3 ++-
+ images/git-br-on-master.png | Bin 0 -> 7317 bytes
+ 3 files changed, 31 insertions(+), 2 deletions(-)
+ create mode 100644 images/git-br-on-master.png
 ```
+
 合并后，再查看`readme.txt`的内容，就可以看到，和`dev`分支的最新提交是完全一样的。注意到上面的*Fast-forward*信息，Git告诉我们，这次合并是“**快进模式**”，也就是直接把`master`指向`dev`的当前提交，所以合并速度非常快。
 
 #### 删除分支(dev)
