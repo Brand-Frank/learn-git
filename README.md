@@ -307,7 +307,7 @@ Git创建一个分支很快，因为除了**增加一个`dev`指针**，**改改
 
 ![git-br-rm](images/git-br-rm.png)
 
-#### 创建dev分支
+#### 创建与切换dev分支
 ```powershell
 ## method-1
 git branch dev    # 创建dev分支
@@ -334,6 +334,10 @@ $ git branch
 $ echo "Create a new branch is quick." >> hello-git.txt
 $ git add --all
 $ git commit -m "branch test"
+```
+#### 切换回主分支(main)
+```powershell
+git checkout main
 ```
 
 ### 解决冲突
