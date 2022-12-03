@@ -312,9 +312,13 @@ Git创建一个分支很快，因为除了**增加一个`dev`指针**，**改改
 ## method-1
 git branch dev    # 创建dev分支
 git checkout dev    # 切换到dev分支
+###
+Switched to branch 'dev'
+M       README.md
 
 ## method-2
 git checkout -b dev    #创建并切换到dev分支
+#Note 这里不能复现廖老师的实验，所以建议用上面的方法创建并切换至dev分支
 ```
 
 #### 列出所有分支
@@ -323,6 +327,13 @@ $ git branch
 ###
   dev
 * mai
+```
+
+#### 在分支上做出修改并提交
+```powershell
+$ echo "Create a new branch is quick." >> hello-git.txt
+$ git add --all
+$ git commit -m "branch test"
 ```
 
 ### 解决冲突
