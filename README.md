@@ -52,6 +52,9 @@
   - [标签管理](#标签管理)
     - [创建标签](#创建标签)
     - [管理标签](#管理标签)
+  - [Git自定义](#git自定义)
+    - [让Git显示颜色](#让git显示颜色)
+    - [配置git命令的别名](#配置git命令的别名)
 
 
 
@@ -1387,3 +1390,80 @@ To https://github.com/Brand-Frank/learn-git.git
   - 命令`git push origin --tags`可以推送全部未推送过的本地标签；
   - 命令`git tag -d <tag-name>`可以删除一个本地标签；
   - 命令`git push origin :refs/tags/<tag-name>`可以删除一个远程标签。
+
+
+## Git自定义
+### 让Git显示颜色
+```powershell
+$ git config --global color.ui true
+```
+### 配置git命令的别名
+```powershell
+$ git config --global alias.st status
+$ git status
+
+$ git config --global alias.co checkout
+$ git checkout
+
+$ git config --global alias.ci commit
+$ git commit
+
+$ git config --global alias.br branch
+$ git branch
+
+$ git config --global alias.unstage 'reset HEAD'
+$ git reset HEAD file.c
+
+$ git config --global alias.last 'log -1'    # 显示最后一次提交信息
+$ git last
+# =
+$ git log -l
+```
+
+每个仓库的Git配置文件都放在`.git/config`文件中：
+```powershell
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/Brand-Frank/learn-git.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[branch "test-br"]
+	remote = origin
+	merge = refs/heads/test-br
+[branch "dep"]
+	remote = origin
+	merge = refs/heads/dep
+[branch "dev"]
+	remote = origin
+	merge = refs/heads/dev
+[branch "bug-fix"]
+	remote = origin
+	merge = refs/heads/bug-fix
+[branch "issue-101"]
+	remote = origin
+	merge = refs/heads/issue-101
+[branch "multi"]
+	remote = origin
+	merge = refs/heads/multi
+```
+
+![config](images/config.png)
+
+
+
+```powershell
+# =
+```
+```powershell
+# =
+```
+```powershell
+# =
+```
