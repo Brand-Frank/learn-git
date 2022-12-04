@@ -1,52 +1,56 @@
 # learn-git
 系统学习Git和GitHub
 
-参考学习：
-- [廖雪峰的博客](https://www.liaoxuefeng.com/wiki/896043488029600)
-- [GitHub Docs](https://docs.github.com/cn)
+> 参考学习：
+> - [廖雪峰的博客](https://www.liaoxuefeng.com/wiki/896043488029600)
+> - [GitHub Docs](https://docs.github.com/cn)
 
-- [Git简介](#Git简介)
-  - [初始化账户](#初始化账户)
-  - [初始化版本库](#初始化版本库)
-  - [添加文件](#添加文件)
-  - [查看状态](#查看状态)
-  - [编辑文件并查看区别](#编辑文件并查看区别)
-  - [再次提交与查看状态](#再次提交与查看状态)
-  - [查看日志](#查看日志)
+<p style="font-size: 1.5rem; text-align: center">目录</p>
 
-- [Git本地仓库管理](#Git本地仓库管理)
-  - [退回到上一个版本](#退回到上一个版本)
-  - [退回到未来的版本](#退回到未来的版本)
-  - [工作区和暂存区](#工作区和暂存区)
-  - [Git只追踪修改，而非文件](#Git只追踪修改，而非文件)
-  - [查看工作区和版本库里最新版本的区别](#查看工作区和版本库里最新版本的区别)
-  - [丢弃工作区的修改](#丢弃工作区的修改)
-- [远程仓库](#远程仓库)
-  - [本地仓库与远程仓库建立关联](#本地仓库与远程仓库建立关联)
-  - [推送至远程仓库](#推送至远程仓库)
-  - [丢弃工作区的修改](#丢弃工作区的修改)
-  - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
-  - [从远程仓库克隆到本地](#从远程仓库克隆到本地)
-- [分支管理](#分支管理)
-  - [创建与合并分支](#创建与合并分支)
-    - [创建与切换dev分支](#创建与切换dev分支)
-    - [列出所有分支](#列出所有分支)
-    - [在分支上做出修改并提交](#在分支上做出修改并提交)
-    - [切换回主分支(main)](#切换回主分支(main))
-    - [合并分支(dev)到主分支(main)](#合并分支(dev)到主分支(main))
-    - [删除分支(dev)](#删除分支(dev))
-    - [切换分支的另一种方式](#切换分支的另一种方式(switch))
-    - [分支管理总结](#分支管理总结)
-  - [解决冲突](#解决冲突)
-  - [分支管理策略](#分支管理策略)
-  - [Bug分支](#Bug分支)
-  - [Feature分支](#Feature分支)
-  - [多人协作](#多人协作)
-    - [查看远程仓库的信息](#查看远程仓库的信息)
-    - [推送分支](#推送分支)
-    - [抓取分支](#抓取分支)
-    - [小结](#小结)
-  - [Rebase](#Rebase)
+- [learn-git](#learn-git)
+  - [Git简介](#git简介)
+    - [初始化账户](#初始化账户)
+    - [初始化版本库](#初始化版本库)
+    - [添加文件](#添加文件)
+    - [查看状态](#查看状态)
+    - [编辑文件并查看区别](#编辑文件并查看区别)
+    - [再次提交与查看状态](#再次提交与查看状态)
+    - [查看日志](#查看日志)
+  - [Git本地仓库管理](#git本地仓库管理)
+    - [退回到上一个版本](#退回到上一个版本)
+    - [退回到未来的版本](#退回到未来的版本)
+    - [工作区和暂存区](#工作区和暂存区)
+    - [Git只追踪修改，而非文件](#git只追踪修改而非文件)
+    - [查看工作区和版本库里最新版本的区别](#查看工作区和版本库里最新版本的区别)
+    - [丢弃工作区的修改](#丢弃工作区的修改)
+  - [远程仓库](#远程仓库)
+    - [本地仓库与远程仓库建立关联](#本地仓库与远程仓库建立关联)
+    - [推送至远程仓库](#推送至远程仓库)
+    - [删除与远程仓库的绑定关系](#删除与远程仓库的绑定关系)
+    - [从远程仓库克隆到本地](#从远程仓库克隆到本地)
+  - [分支管理](#分支管理)
+    - [创建与合并分支](#创建与合并分支)
+      - [创建与切换dev分支](#创建与切换dev分支)
+      - [列出所有分支](#列出所有分支)
+      - [在分支上做出修改并提交](#在分支上做出修改并提交)
+      - [切换回主分支(main)](#切换回主分支main)
+      - [合并分支(dev)到主分支(main)](#合并分支dev到主分支main)
+      - [删除分支(dev)](#删除分支dev)
+      - [切换分支的另一种方式(switch)](#切换分支的另一种方式switch)
+      - [dev分支上传到远程仓库](#dev分支上传到远程仓库)
+      - [分支管理总结](#分支管理总结)
+    - [解决冲突](#解决冲突)
+    - [分支管理策略](#分支管理策略)
+    - [Bug分支](#bug分支)
+    - [Feature分支](#feature分支)
+    - [多人协作](#多人协作)
+      - [查看远程仓库的信息](#查看远程仓库的信息)
+      - [推送分支](#推送分支)
+      - [抓取分支](#抓取分支)
+      - [小结](#小结)
+    - [Rebase](#rebase)
+    - [](#)
+  - [标签管理](#标签管理)
 
 
 
@@ -1033,7 +1037,103 @@ PS E:\CSB\Git\learn-git> git log --graph --pretty=oneline --abbrev-commit
 
 在上一节我们看到了，多人在同一个分支上协作时，很容易出现冲突。即使没有冲突，后`push`的童鞋不得不先`pull`，在本地合并，然后才能`push`成功。**为什么Git的提交历史不能是一条干净的直线？怎么把分叉的提交变成直线。**
 
+- 预先准备：
 
+```powershell
+$ git add .\images\multi.png
+$ git commit -m "Add a image."
+###
+[main e099800] Add a image.
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 images/multi.png
+
+$ git add README.md
+$ git commit -m "Update README.md"
+###
+[main 57d1be8] Update README.md
+ 1 file changed, 82 insertions(+)
+```
+
+1. 使用`git log`命令查看这两次提交：
+```powershell
+$ git log --graph --pretty=oneline --abbrev-commit
+###
+* 57d1be8 (HEAD -> main) Update README.md
+* e099800 Add a image.
+* 1bc72ef start rebase
+*   ba35363 (origin/main, origin/HEAD) Merge pull request #1 from Brand-Frank/multi
+|\
+| * 7769cd6 (origin/multi, multi) NOTE: 工作区未提交就checkout到其他分支，会导致工作区的内容被覆盖掉
+| * 5b0dc82 finsh conflict and multi-person association
+| *   58e44c3 pull sussess but a conflict
+| |\
+| | * d3b70ad add env
+| |/
+```
+![tree](images/tree.png)
+
+git用`HEAD -> main`和`origin/main, origin/HEAD` 标识出当前分支的`HEAD`和远程`origin`的位置分别是`57d1be8 Update README.md`和`ba35363 Merge pull request`，本地分支比远程分支快三个提交
+
+现在我们尝试推送本地分支：
+```powershell
+$ git push origin main
+###
+To https://github.com/Brand-Frank/learn-git.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/Brand-Frank/learn-git.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+很不幸，失败了，这说明有人先于我们推送了远程分支。按照经验，先`pull`一下：
+```powershell
+$ git pull
+###
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/Brand-Frank/learn-git.git
+   d1be385..f005ed4  main     -> origin/main
+ * [new tag]         v1.0       -> v1.0
+Auto-merging hello.py
+Merge made by the 'recursive' strategy.
+ hello.py | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+再用`git status`看看状态：
+```powershell
+$ git status
+###
+On branch master
+Your branch is ahead of 'origin/main' by 4 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+```
+
+加上刚才合并的提交，现在我们本地分支比远程分支超前4个提交。
+
+```powershell
+$ git log --graph --pretty=oneline --abbrev-commit
+###
+*   e0ea545 (HEAD -> main) Merge branch    # pull其他人的修改并再次提交 ## 超前4
+|\  
+| * f005ed4 (origin/master) New change    # 其他人修改的部分
+* | 57d1be8 Update README.md    ## 超前3
+* | e099800 Add a image.        ## 超前2
+* | 1bc72ef start rebase        ## 超前1
+|/  
+* d1be385 init hello
+```
+ - 尝试使用`git rebase`
+
+```powershell
+
+```
 
 
 
