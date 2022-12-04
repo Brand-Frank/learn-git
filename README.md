@@ -733,6 +733,64 @@ $ git branch
 ```
 
 ### 多人协作
+
+#### 查看远程仓库的信息
+```powershell
+$ git remote
+###
+origin    # 远程仓库的默认名称为origin
+
+# or
+$ git remote -v
+origin  https://github.com/Brand-Frank/learn-git.git (fetch)
+origin  https://github.com/Brand-Frank/learn-git.git (push)
+```
+上面显示了可以抓取和推送的`origin`的地址
+
+#### 推送分支
+推送分支，就是把该分支上的所有本地提交推送到远程库。**推送时，要指定本地分支**，这样，Git就会把该分支推送到远程库对应的远程分支上：
+```powershell
+$ git push origin master
+
+# 如果要推送其他分支，比如dev，就改成：
+$ git push origin dev
+#or
+$ git push --set-upstream origin dev
+```
+但是，并不是一定要把本地分支往远程推送，那么，哪些分支需要推送，哪些不需要呢？
+
+- `master`分支是主分支，因此要时刻与远程同步；
+- `dev`分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+- `bug`分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
+- `feature`分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
+
+总之，就是在Git中，分支完全可以在本地自己藏着玩，是否推送，视你的心情而定！
+
+#### 抓取分支
+多人协作时，大家都会往`master`和`dev`分支上推送各自的修改。
+
+现在，模拟一个你的小伙伴，可以在另一台电脑（注意要把SSH Key添加到GitHub）或者同一台电脑的另一个目录下克隆：
+```powershell
+$ git clone https://github.com/Brand-Frank/learn-git.git
+Cloning into 'learn-git'...
+remote: Counting objects: 40, done.
+remote: Compressing objects: 100% (21/21), done.
+remote: Total 40 (delta 14), reused 40 (delta 14), pack-reused 0
+Receiving objects: 100% (40/40), done.
+Resolving deltas: 100% (14/14), done.
+```
+
+当你的小伙伴从远程库`clone`时，默认情况下，你的小伙伴只能看到本地的`main`分支:
+```powershell
+$ git branch
+* main
+```
+现在，你的小伙伴要在`multi`分支上开发，就必须**创建远程origin的multi分支到本地**，于是他用这个命令创建本地dev分支：
+```powershell
+$ git checkout -b multi origin/multi
+```
+他就可以在`multi`上继续修改，然后，时不时地把`multi`分支`push`到远程
+
 ### Rebase
 
 
