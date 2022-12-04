@@ -4,6 +4,7 @@
 > 参考学习：
 > - [廖雪峰的博客](https://www.liaoxuefeng.com/wiki/896043488029600)
 > - [GitHub Docs](https://docs.github.com/cn)
+> - [Git-Cheat-Sheet](https://github.com/flyhigher139/Git-Cheat-Sheet)
 
 <p style="font-size: 1.5rem; text-align: center">目录</p>
 
