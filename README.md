@@ -695,6 +695,43 @@ $ git cherry-pick bcddefd
 
 >添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，**每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支**。
 
+```powershell
+$ git switch -c feature-br
+###
+witched to a new branch 'feature-br'
+
+$ git add vulcan.c
+$ git commit -m "edit vulcan.c file and prepare to merge to main branch"
+###
+[feature-br ce49c06] edit vulcan.c file and prepare to merge to main branch
+ 1 file changed, 6 insertions(+)
+
+# 切回main分支，打算合并feature-br分支
+$ git switch main
+```
+一切顺利的话feature分支和bug分支是类似的，合并，然后删除。但是！就在此时，接到上级命令，因经费不足，新功能必须取消！虽然白干了，但是这个包含机密资料的分支还是必须就地销毁：
+
+```powershell
+$ git branch -d feature-br
+###
+error: The branch 'feature-br' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D feature-br'.
+```
+销毁失败。Git友情提醒，feature-br分支还没有被合并，如果删除，将丢失掉修改，如果要强行删除，需要使用大写的`-D`参数。所以强行删除`feature-br`分支
+```powershell
+$ git branch -D feature-br
+###
+Deleted branch feature-br (was ce49c06).
+
+$ git branch
+  bug-fix
+  dep
+  dev
+  issue-101
+* main
+  test-br
+```
+
 ### 多人协作
 ### Rebase
 
