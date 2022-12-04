@@ -897,7 +897,16 @@ $ git commit -m "pull success but a conflict"
 [multi 58e44c3] pull success but a conflict
 
 $ git push origin multi
-
+###
+Enumerating objects: 14, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (9/9), 3.02 KiB | 3.02 MiB/s, done.
+Total 9 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
+To https://github.com/Brand-Frank/learn-git.git
+   d3b70ad..5b0dc82  multi -> multi
 ```
 
 #### 小结
@@ -924,8 +933,16 @@ $ git push origin multi
 
 - 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
 
-
-
+- <p style="color: red">还未add和commit本分支的修改，就checkout到其它分支，会把这里修改但未提交的工作区部分覆盖掉，报错如下：</p>
+```powershell
+$ git switch main
+###
+error: Your local changes to the following files would be overwritten by checkout:
+        README.md
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+**因此需要提交修改，或者stash隐藏工作区**
 
 ### Rebase
 
