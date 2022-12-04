@@ -1457,13 +1457,3 @@ $ git log -l
 ![config](images/config.png)
 
 
-
-```powershell
-# =
-```
-```powershell
-# =
-```
-```powershell
-# =
-```
