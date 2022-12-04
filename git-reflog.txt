@@ -1,0 +1,134 @@
+926332a (HEAD -> main) HEAD@{0}: commit: Try rebase
+57d1be8 HEAD@{1}: commit: Update README.md
+e099800 HEAD@{2}: commit: Add a image.
+1bc72ef HEAD@{3}: commit: start rebase
+ba35363 (origin/main, origin/HEAD) HEAD@{4}: pull: Fast-forward
+1dcef7f HEAD@{5}: checkout: moving from multi to main
+7769cd6 (origin/multi, multi) HEAD@{6}: commit: NOTE: 工作区未提交就checkout到其他分支，会导致工作区的内容被覆盖掉
+5b0dc82 HEAD@{7}: reset: moving to HEAD
+5b0dc82 HEAD@{8}: commit: finsh conflict and multi-person association
+58e44c3 HEAD@{9}: commit (merge): pull sussess but a conflict
+f7b8694 HEAD@{10}: commit: add env (master)
+1dcef7f HEAD@{11}: checkout: moving from main to multi
+1dcef7f HEAD@{12}: commit: Start multi-person learning.
+2b9fc47 HEAD@{13}: checkout: moving from issue-101 to main
+bcddefd (origin/issue-101, issue-101) HEAD@{14}: checkout: moving from bug-fix to issue-101
+19351db (origin/bug-fix, bug-fix) HEAD@{15}: checkout: moving from main to bug-fix
+2b9fc47 HEAD@{16}: commit: Update README.md and start multi-person association
+5aac343 HEAD@{17}: checkout: moving from dev to main
+3b3891f (origin/dev, dev) HEAD@{18}: checkout: moving from feature-br to dev
+ce49c06 HEAD@{19}: commit: edit vulcan.c file and prepare to merge to main branch
+579ca76 HEAD@{20}: commit: add feature vulcan.c file
+3a4a567 HEAD@{21}: checkout: moving from main to feature-br
+5aac343 HEAD@{22}: merge feature-br: Merge made by the 'ort' strategy.
+af70ace HEAD@{23}: checkout: moving from feature-br to main
+3a4a567 HEAD@{24}: commit: little changes
+af70ace HEAD@{25}: checkout: moving from main to feature-br
+af70ace HEAD@{26}: checkout: moving from feature-br to main
+af70ace HEAD@{27}: checkout: moving from main to feature-br
+af70ace HEAD@{28}: merge bug-fix: Merge made by the 'ort' strategy.
+146b0e6 HEAD@{29}: checkout: moving from bug-fix to main
+19351db (origin/bug-fix, bug-fix) HEAD@{30}: commit: Update README.md and 开始Feature分支的学习
+e4f50fe HEAD@{31}: checkout: moving from main to bug-fix
+146b0e6 HEAD@{32}: checkout: moving from bug-fix to main
+e4f50fe HEAD@{33}: cherry-pick: fix bug 101
+a5c82fb HEAD@{34}: checkout: moving from issue-101 to bug-fix
+bcddefd (origin/issue-101, issue-101) HEAD@{35}: checkout: moving from bug-fix to issue-101
+a5c82fb HEAD@{36}: checkout: moving from main to bug-fix
+146b0e6 HEAD@{37}: checkout: moving from bug-fix to main
+a5c82fb HEAD@{38}: checkout: moving from main to bug-fix
+146b0e6 HEAD@{39}: merge issue-101: Merge made by the 'ort' strategy.
+c5fbcda HEAD@{40}: checkout: moving from issue-101 to main
+bcddefd (origin/issue-101, issue-101) HEAD@{41}: commit: fix bug 101
+c5fbcda HEAD@{42}: checkout: moving from main to issue-101
+c5fbcda HEAD@{43}: checkout: moving from bug-fix to main
+a5c82fb HEAD@{44}: reset: moving to HEAD
+a5c82fb HEAD@{45}: checkout: moving from main to bug-fix
+c5fbcda HEAD@{46}: merge bug-fix: Merge made by the 'ort' strategy.
+7a506df HEAD@{47}: checkout: moving from bug-fix to main
+a5c82fb HEAD@{48}: commit: TEST: git stash
+7a506df HEAD@{49}: reset: moving to HEAD
+7a506df HEAD@{50}: checkout: moving from main to bug-fix
+7a506df HEAD@{51}: checkout: moving from dev to main
+3b3891f (origin/dev, dev) HEAD@{52}: checkout: moving from dep to dev
+a5ecaeb (origin/dep, dep) HEAD@{53}: checkout: moving from main to dep
+7a506df HEAD@{54}: commit: Add 1 image
+312869b HEAD@{55}: commit: Update README.md and start BUG branch.
+4327338 HEAD@{56}: commit: Add 1 images
+e3733bb HEAD@{57}: merge dep: Merge made by the 'ort' strategy.
+878b60e HEAD@{58}: checkout: moving from dep to main
+a5ecaeb (origin/dep, dep) HEAD@{59}: checkout: moving from test-br to dep
+217a49c (origin/test-br, test-br) HEAD@{60}: checkout: moving from dev to test-br
+3b3891f (origin/dev, dev) HEAD@{61}: checkout: moving from main to dev
+878b60e HEAD@{62}: checkout: moving from dep to main
+a5ecaeb (origin/dep, dep) HEAD@{63}: commit: add merge
+878b60e HEAD@{64}: checkout: moving from main to dep
+878b60e HEAD@{65}: commit: Add cspell-file
+1c1b4f7 HEAD@{66}: commit: Update README.md
+1505d9c HEAD@{67}: commit: Add 3 images.
+9c6cb92 HEAD@{68}: commit (merge): conflict fixed
+3629d7b HEAD@{69}: checkout: moving from feature1 to main
+ac558db HEAD@{70}: checkout: moving from main to feature1
+3629d7b HEAD@{71}: commit: &simple
+c6b1b53 HEAD@{72}: checkout: moving from feature1 to main
+ac558db HEAD@{73}: commit: AND simple
+c6b1b53 HEAD@{74}: checkout: moving from main to feature1
+c6b1b53 HEAD@{75}: commit: QA: GitHub仓库页面上的那些东西是干什么用的？
+d7385ad HEAD@{76}: commit: Notice: 从分支上提交代码到远端仓库的注意事项 #dev分支上传到远程仓库
+221b256 HEAD@{77}: checkout: moving from test-br to main
+217a49c (origin/test-br, test-br) HEAD@{78}: checkout: moving from main to test-br
+221b256 HEAD@{79}: commit: have a rest
+c1af378 HEAD@{80}: checkout: moving from test-branch1 to main
+c1af378 HEAD@{81}: checkout: moving from main to test-branch1
+c1af378 HEAD@{82}: commit: TEST: delete test branch1
+217a49c (origin/test-br, test-br) HEAD@{83}: merge test-br: Fast-forward
+3b3891f (origin/dev, dev) HEAD@{84}: checkout: moving from dev to main
+3b3891f (origin/dev, dev) HEAD@{85}: checkout: moving from main to dev
+3b3891f (origin/dev, dev) HEAD@{86}: checkout: moving from test-br to main
+217a49c (origin/test-br, test-br) HEAD@{87}: commit: Update README.md of test-br
+052935e HEAD@{88}: checkout: moving from main to test-br
+3b3891f (origin/dev, dev) HEAD@{89}: checkout: moving from dev to main
+3b3891f (origin/dev, dev) HEAD@{90}: checkout: moving from test-br to dev
+052935e HEAD@{91}: commit: FIX: 修复廖老师创建并切换分支不能复现的问题，git checkout -b test-b --> Switched to a new branch 'test-br'     
+3b3891f (origin/dev, dev) HEAD@{92}: checkout: moving from main to test-br
+3b3891f (origin/dev, dev) HEAD@{93}: merge dev: Fast-forward
+5e1405a HEAD@{94}: checkout: moving from dev to main
+3b3891f (origin/dev, dev) HEAD@{95}: commit: merge branch and delete branch
+6eee865 HEAD@{96}: checkout: moving from main to dev
+5e1405a HEAD@{97}: checkout: moving from dev to main
+6eee865 HEAD@{98}: checkout: moving from dev to dev
+6eee865 HEAD@{99}: commit: test branch
+51d53e8 HEAD@{100}: commit: branch test
+5e1405a HEAD@{101}: checkout: moving from main to dev
+5e1405a HEAD@{102}: checkout: moving from dev to main
+bc72ae1 HEAD@{103}: checkout: moving from main to dev
+5e1405a HEAD@{104}: commit: create a branch
+bc72ae1 HEAD@{105}: checkout: moving from dev to main
+bc72ae1 HEAD@{106}: checkout: moving from main to dev
+bc72ae1 HEAD@{107}: commit: Update README.md file
+b7d80a6 HEAD@{108}: commit: add images
+0986fd0 HEAD@{109}: commit: fix: images link to false place
+cea6148 HEAD@{110}: commit: push to remote repositories
+5edb747 HEAD@{111}: commit: start remote repo
+3663ab1 HEAD@{112}: reset: moving to HEAD^
+8707577 HEAD@{113}: commit: remove test.txt
+3663ab1 HEAD@{114}: commit: add test.txt
+5d6c283 HEAD@{115}: commit: first success.
+3be3c4a HEAD@{116}: commit: OK
+86c986b HEAD@{117}: commit: git tracks changes
+2e70093 HEAD@{118}: commit: understand how stage works
+ec62f7e HEAD@{119}: commit: try again
+af0fba9 HEAD@{120}: commit: working-area and temp-area
+0dc07a4 HEAD@{121}: commit: hello here
+d7b2209 HEAD@{122}: reset: moving to HEAD^^
+f1ef8f3 HEAD@{123}: reset: moving to HEAD^
+7c4bd2b HEAD@{124}: reset: moving to 7c4bd
+cfd4505 HEAD@{125}: reset: moving to HEAD^
+422de07 HEAD@{126}: commit: add a note
+cfd4505 HEAD@{127}: commit: Retry again
+f1ef8f3 HEAD@{128}: reset: moving to HEAD^
+7c4bd2b HEAD@{129}: commit: append GPL
+f1ef8f3 HEAD@{130}: commit: add distrbuted
+06b98ed HEAD@{131}: commit: add a file.
+d7b2209 HEAD@{132}: commit: wrote a hello-git file.
+30d25aa HEAD@{133}: clone: from https://github.com/Brand-Frank/learn-git.git
