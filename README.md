@@ -951,7 +951,89 @@ Aborting
 ```
 **因此需要提交修改，或者stash隐藏工作区**
 
+- **多人协作的分支树情况**
+
+![multi](images/multi.png)
+
+```powershell
+PS E:\CSB\Git\learn-git> git log --graph --pretty=oneline --abbrev-commit
+* 1bc72ef (HEAD -> main) start rebase
+*   ba35363 (origin/main, origin/HEAD) Merge pull request #1 from Brand-Frank/multi
+|\
+| * 7769cd6 (origin/multi, multi) NOTE: 工作区未提交就checkout到其他分支，会导致工作区的内容被覆盖掉
+| * 5b0dc82 finsh conflict and multi-person association
+| *   58e44c3 pull sussess but a conflict
+| |\
+| | * d3b70ad add env
+| |/
+|/|
+| * f7b8694 add env (master)
+|/
+* 1dcef7f Start multi-person learning.
+* 2b9fc47 Update README.md and start multi-person association
+*   5aac343 merge feature-br
+|\
+| * 3a4a567 little changes
+|/
+*   af70ace Merge branch 'bug-fix'
+|\
+| * 19351db (origin/bug-fix, bug-fix) Update README.md and 开始Feature分支的学习
+| * e4f50fe fix bug 101
+* |   146b0e6 merge bug fix 101
+|\ \
+| * | bcddefd (origin/issue-101, issue-101) fix bug 101
+|/ /
+* | c5fbcda TEST: git stash.
+|\|
+| * a5c82fb TEST: git stash
+|/
+* 7a506df Add 1 image
+* 312869b Update README.md and start BUG branch.
+* 4327338 Add 1 images
+*   e3733bb merge with no-ff
+|\
+| * a5ecaeb (origin/dep, dep) add merge
+|/
+* 878b60e Add cspell-file
+* 1c1b4f7 Update README.md
+* 1505d9c Add 3 images.
+*   9c6cb92 conflict fixed
+|\
+| * ac558db AND simple
+* | 3629d7b &simple
+|/
+* c6b1b53 QA: GitHub仓库页面上的那些东西是干什么用的？
+* d7385ad Notice: 从分支上提交代码到远端仓库的注意事项 #dev分支上传到远程仓库
+* 221b256 have a rest
+* c1af378 TEST: delete test branch1
+* 217a49c (origin/test-br, test-br) Update README.md of test-br
+* 052935e FIX: 修复廖老师创建并切换分支不能复现的问题，git checkout -b test-b --> Switched to a new branch 'test-br'
+* 3b3891f (origin/dev, dev) merge branch and delete branch
+* 6eee865 test branch
+* 51d53e8 branch test
+* 5e1405a create a branch
+* bc72ae1 Update README.md file
+* b7d80a6 add images
+* 0986fd0 fix: images link to false place
+* cea6148 push to remote repositories
+* 5edb747 start remote repo
+* 3663ab1 add test.txt
+* 5d6c283 first success.
+* 3be3c4a OK
+* 86c986b git tracks changes
+* 2e70093 understand how stage works
+* ec62f7e try again
+* af0fba9 working-area and temp-area
+* 0dc07a4 hello here
+* d7b2209 wrote a hello-git file.
+* 30d25aa Update README.md
+* cd9255a Initial commit
+```
 ### Rebase
+
+在上一节我们看到了，多人在同一个分支上协作时，很容易出现冲突。即使没有冲突，后`push`的童鞋不得不先`pull`，在本地合并，然后才能`push`成功。**为什么Git的提交历史不能是一条干净的直线？怎么把分叉的提交变成直线。**
+
+
 
 
 
