@@ -600,10 +600,94 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 并不是你不想提交，而是工作只进行到一半，还没法提交，预计完成还需1天时间。但是，必须在两个小时内修复该bug，怎么办？幸好，Git还提供了一个**`stash`功能**，**可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作**：
 
+```powershell
+# 保存工作现场
+$ git stash
+###
+Saved working directory and index state WIP on bug-fix: a5c82fb TEST: git stash
+$ git status
+On branch bug-fix
+nothing to commit, working tree clean
 
+# 回到主分支
+$ git checkout main
+###
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
 
+# 创建一个issue-101分支来修复bug
+$ git checkout -b issue-101
+###
+Switched to a new branch 'issue-101'
 
+# 在issue-101分支上修复bug并提交
+$ git add .\hello-git.txt
+$ git commit -m "fix bug 101"
+[issue-101 bcddefd] fix bug 101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+# 回到主分支
+$ git switch main
+###
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+# 在主分支上把修复的bug合并过来
+$ git merge --no-ff -m "merge bug fix 101" issue-101
+###
+Merge made by the 'ort' strategy.
+ hello-git.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+# 回到临时工作区
+$ git switch bug-fix
+###
+Switched to branch 'bug-fix'
+
+$ git status    # 看不到隐藏的分支
+###
+On branch bug-fix
+nothing to commit, working tree clean
+
+$ git stash    # 在隐藏工作区的时候，主分支已经完成了一次bug修复
+Merge: 7a506df a5c82fb    
+Author: Brand-Frank <3069584010@qq.com>
+Date:   Sun Dec 4 11:23:45 2022 +0800
+
+$ git stash list
+stash@{0}: WIP on bug-fix: 7a506df Add 1 image
+
+# 恢复工作区
+$ git stash pop
+###
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+        modified:   hello-git.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# 将issue-101分支修改的bug应用到bug-fix分支（非合并，只是把issue-101里的修改部分应用到本分支！）
+$ git cherry-pick bcddefd
+[bug-fix e4f50fe] fix bug 101
+ Date: Sun Dec 4 11:27:43 2022 +0800
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+最终`bug-fix`分支和`main`分支的区别是`bug-fix`隐藏工作区的部分
+
+- `git stash`两种恢复方法
+  - 用`git stash apply`恢复，但是恢复后，**`stash`内容并不删除**，你需要用`git stash drop`来删除；
+  - 用`git stash pop`，**恢复的同时把`stash`内容也删了**。
+
+- **小结：**
+(1)修复`bug`时，我们会通过创建新的`bug`分支进行修复，然后合并，最后删除；
+
+(2)当手头工作没有完成时，先把工作现场`git stash`一下，然后去修复`bug`，修复后，再`git stash pop`，回到工作现场；
+
+(3)在`master`分支上修复的`bug`，想要合并到当前`dev`分支，可以用`git cherry-pick <commit>`命令，把`bug`提交的修改“复制”到当前分支，避免重复劳动。
 
 
 
