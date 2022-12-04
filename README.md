@@ -532,9 +532,53 @@ $ git log --graph --pretty=oneline --abbrev-commit
 - 创建并切换到`dep`分支(`git switch -c dep` 或`git checkout -b dep`)
 - 修改`hello-git.txt`文件，提交一个新的`commit`(`git add hello-git.txt` | `git commit -m "add merge"`)
 
+2. 切换回`main`，并使用`--no-ff`参数，表示禁用`Fast forward`:
 
+```powershell
+$ git switch main
+###
+Switched to branch 'main'
 
+$ git merge --no-ff -m "merge with no-ff" dep
+###
+Merge made by the 'ort' strategy.    ## ort策略
+ README.md     | 33 +++++++++++++++++++++++----------
+ hello-git.txt |  4 +++-
+ 2 files changed, 26 insertions(+), 11 deletions(-)
+```
 
+3. 使用`git log`查看分支历史
+
+```powershell
+$ git log --graph --pretty=oneline --abbrev-commit
+
+###
+*   e3733bb (HEAD -> main) merge with no-ff    # main
+|\
+| * a5ecaeb (dep) add merge    # dep
+|/
+* 878b60e Add cspell-file    # main
+* 1c1b4f7 Update README.md    # main
+* 1505d9c Add 3 images.        # main
+*   9c6cb92 (HEAD -> main) conflict fixed    # 解决冲突时点的提交
+|\
+| * ac558db (feature1) AND simple    # feature分支
+* | 3629d7b &simple    # main分支
+|/
+* c6b1b53 (origin/main, origin/HEAD) QA: GitHub仓库页面上的那些东西是干什么用的？
+* d7385ad Notice: 从分支上提交代码到远端仓库的注意事项 #dev分支上传到远程仓库
+* 221b256 have a rest
+```
+不使用`Fast forward`模式，merge后像这样：
+![git-no-ff-mode](images/git-no-ff-mode.png)
+
+- **分支策略**
+在实际开发中，我们应该按照几个基本原则进行分支管理：首先，`master`分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；那在哪干活呢？干活都在`dev`分支上，也就是说，`dev`分支是不稳定的，到某个时候，比如1.0版本发布时，再把`dev`分支合并到`master`上，在`master`分支发布1.0版本；你和你的小伙伴们每个人都在`dev`分支上干活，每个人都有自己的分支，时不时地往`dev`分支上合并就可以了。所以，团队合作的分支看起来就像这样：
+
+![git-br-policy](images/git-br-policy.png)
+
+- **小结**
+Git分支十分强大，在团队开发中应该充分应用。合并分支时，加上`--no-ff`参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
 
 ### Bug分支
 ### Feature分支
