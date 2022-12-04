@@ -49,9 +49,7 @@
       - [抓取分支](#抓取分支)
       - [小结](#小结)
     - [Rebase](#rebase)
-    - [](#)
   - [标签管理](#标签管理)
-
 
 
 
@@ -1129,17 +1127,48 @@ $ git log --graph --pretty=oneline --abbrev-commit
 |/  
 * d1be385 init hello
 ```
- - 尝试使用`git rebase`
-
+ - 尝试使用`git rebase`，详见[Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
 ```powershell
+$ git log --graph --pretty=oneline --abbrev-commit
+###
+*   e0ea545 (HEAD -> master) Merge branch 'master' of github.com:michaelliao/learngit
+|\  
+| * f005ed4 (origin/master) set exit=1
+* | 582d922 add author
+* | 8875536 add comment
+|/  
+* d1be385 init hello
+...
 
+$ git rebase
+###
+First, rewinding head to replay your work on top of it...
+Applying: add comment
+Using index info to reconstruct a base tree...
+M	hello.py
+Falling back to patching base and 3-way merge...
+Auto-merging hello.py
+Applying: add author
+Using index info to reconstruct a base tree...
+M	hello.py
+Falling back to patching base and 3-way merge...
+Auto-merging hello.py
+
+$ git log --graph --pretty=oneline --abbrev-commit
+###
+* 7e61ed4 (HEAD -> master) add author
+* 3611cfe add comment
+* f005ed4 (origin/master) set exit=1
+* d1be385 init hello
+...
 ```
+> Git把我们本地的提交“挪动”了位置，放到了`f005ed4 (origin/master) set exit=1`之后，这样，整个提交历史就成了一条直线。`rebase`操作前后，最终的提交内容是一致的，但是，我们本地的`commit`修改内容已经变化了，它们的修改不再基于`d1be385 init hello`，而是基于`f005ed4 (origin/master) set exit=1`，但最后的提交`7e61ed4`内容是一致的。
+> 把分叉的提交历史“整理”成一条直线，看上去更直观。缺点是本地的分叉提交已经被修改过了。
 
-
-
-### 
-
-
+- **小结**
+  - `rebase`操作可以**把本地未`push`的分叉提交历史整理成直线**；
+  - `rebase`的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 
 
 ## 标签管理
+
