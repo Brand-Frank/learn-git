@@ -50,6 +50,8 @@
       - [小结](#小结)
     - [Rebase](#rebase)
   - [标签管理](#标签管理)
+    - [创建标签](#创建标签)
+    - [管理标签](#管理标签)
 
 
 
@@ -57,39 +59,39 @@
 ### 初始化账户
 ```powershell
 # 初始化账户
-git config --global user.name "Brand-Frank"
-git config --global user.email "123456789@qq.com"
+$ git config --global user.name "Brand-Frank"
+$ git config --global user.email "123456789@qq.com"
 ```
 
 ### 初始化版本库
 ```powershell
-git init
+$ git init
 ```
 
 ### 添加文件
 ```powershell
-git add hello-git.txt
+$ git add hello-git.txt
 ```
 
 ### 查看状态
 ```powershell
-git status
+$ git status
 ```
 
 ### 编辑文件并查看区别
 ```powershell
-git diff    #需要在git add之前查看，add之后看不到不同之处
+$ git diff    #需要在git add之前查看，add之后看不到不同之处
 ```
 
 ### 再次提交与查看状态
 ```powershell
-git add .
-git status
+$ git add .
+$ git status
 ```
 
 ### 查看日志
 ```powershell
-git log
+$ git log
 ```
 ```powershell
 commit 7c4bd2b3f63e63990b657f7ce67cd035c40e2dc5 (HEAD -> main)
@@ -131,7 +133,7 @@ Date:   Sat Dec 3 19:05:08 2022 +0800
 
 - 简化方式查看日志
 ```powershell
-git log --pretty=oneline
+$ git log --pretty=oneline
 ```
 输出情况
 ```powershell
@@ -149,7 +151,7 @@ cd9255a9d6041daf8979aa228e4fb846e0e97baf Initial commit
 - Git中，用`HEAD`来表示当前版本，也就是最新提交的`7c4bd2b3f63e63990b657f7ce67cd035c40e2dc5`，上一个版本是`HEAD^`，再上一个版本是`HEAD^^`，较多`^`时，写作`HEAD~100`，往前数的第一百个版本。
 
 ```powershell
-git reset --hard HEAD^    #往回退回上一个版本
+$ git reset --hard HEAD^    #往回退回上一个版本
 ```
 用`git log --hard HEAD^`查看一下日志情况
 ```powershell
@@ -172,7 +174,8 @@ git reset --hard 7c4bd    #不用写全commit id，git会自动寻找
 ### 退回到未来的版本
 在Git中，总是有后悔药可以吃的。当你用`git reset --hard HEAD^`回退到<em><strong>add distributed</strong></em>版本时，再想恢复到**append GPL**，就必须找到**append GPL**的`commit id`。Git提供了一个命令`git reflog`用来**记录你的每一次命令**：
 ```powershell
-PS E:\CSB\Git\learn-git> git reflog
+$ git reflog
+###
 0dc07a4 (HEAD -> main) HEAD@{0}: commit: hello here
 d7b2209 HEAD@{1}: reset: moving to HEAD^^
 f1ef8f3 HEAD@{2}: reset: moving to HEAD^
@@ -198,11 +201,12 @@ d7b2209 HEAD@{11}: commit: wrote a hello-git file.
 
 ### 查看工作区和版本库里最新版本的区别
 ```powershell
-git diff HEAD -- hello-git.txt
+$ git diff HEAD -- hello-git.txt
 ```
 输出内容：
 ```powershell
-PS E:\CSB\Git\learn-git> git diff HEAD -- hello-git.txt
+$ git diff HEAD -- hello-git.txt
+###
 diff --git a/hello-git.txt b/hello-git.txt
 index 56b2aa4..053de74 100644
 --- a/hello-git.txt
@@ -216,32 +220,33 @@ index 56b2aa4..053de74 100644
 +Git tracks changes, but not files.
 +Git tracks changes of files.
 \ No newline at end of file
-PS E:\CSB\Git\learn-git> git add --all
-PS E:\CSB\Git\learn-git> git commit -m "OK"
+
+$ git add --all
+$ git commit -m "OK"
 ```
 
 ### 丢弃工作区的修改
 ```powershell
-git checkout -- hello-git.txt    #把hello-git文件在工作区的修改全部撤销，而且此时工作区的修改没有添加到暂存区(add)
+$ git checkout -- hello-git.txt    #把hello-git文件在工作区的修改全部撤销，而且此时工作区的修改没有添加到暂存区(add)
 ```
 - 一种是`hello-git.txt`*自修改后还没有被放到暂存区*，现在，撤销修改就回到**和版本库一模一样的状态**；
 - 一种是`hello-git.txt`*已经添加到暂存区后，又作了修改*，现在，撤销修改就回到**添加到暂存区后的状态**。
 
 - 已经`git add`到暂存区了：`My stupid boss still prefers SVN.`, `git add hello-git.txt`
 ```powershell
-git reset HEAD hello-git.txt    #git reset可以回退版本，也可以把暂存区的修改回退到工作区
-git checkout -- hello-git.txt    #丢弃工作区的修改
+$ git reset HEAD hello-git.txt    #git reset可以回退版本，也可以把暂存区的修改回退到工作区
+$ git checkout -- hello-git.txt    #丢弃工作区的修改
 
 # Note 廖老师的可能有点问题，实验时没有复现出来，尝试使用下面的命令，成功！
-git reset --hard HEAD^
+$ git reset --hard HEAD^
 ```
 
 ## 远程仓库
 ### 本地仓库与远程仓库建立关联
 ```powershell
-git remote add origin git@github.com:Brand-Frank/learn-git.git    # SSH
+$ git remote add origin git@github.com:Brand-Frank/learn-git.git    # SSH
 # or
-git remote add origin https://github.com/Brand-Frank/learn-git.git    #HTTPS
+$ git remote add origin https://github.com/Brand-Frank/learn-git.git    #HTTPS
 ```
 
 ### 推送至远程仓库
@@ -282,7 +287,7 @@ To https://github.com/Brand-Frank/learn-git.git
 > - <p style="font-size:1.2rem; background-color:yellow">注意：</p>这里的删除其实是接触本地和远程的绑定关系，并不是物理上删除远程库。远程库本身并没有变动。要真正删除远程库，需要登陆到GitHub，在后台页面找到删除按钮再删除。
 
 ```powershell
-git remote -v
+$ git remote -v
 ###
 origin  https://github.com/Brand-Frank/learn-git.git (fetch)
 origin  https://github.com/Brand-Frank/learn-git.git (push)
@@ -290,12 +295,13 @@ origin  https://github.com/Brand-Frank/learn-git.git (push)
 
 ### 从远程仓库克隆到本地
 ```powershell
-git clone https://github.com/Brand-Frank/learn-git.git
+$ git clone https://github.com/Brand-Frank/learn-git.git
 ```
 
 ## 分支管理
 
 ### 创建与合并分支
+
 [分支详细讲解](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)
 - **这里的`master`应当为`main`，但是为了与这里的图片匹配，都用`master`来表示了，但是`master`应为种族歧视问题已经在2020年开始弃用了，创建的默认分支均为`main`分支**
 > 截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是指向`master`，`master`才是指向提交的，所以，`HEAD`指向的就是**当前分支**。
@@ -327,14 +333,14 @@ Git创建一个分支很快，因为除了**增加一个`dev`指针**，**改改
 #### 创建与切换dev分支
 ```powershell
 ## method-1
-git branch dev    # 创建dev分支
-git checkout dev    # 切换到dev分支
+$ git branch dev    # 创建dev分支
+$ git checkout dev    # 切换到dev分支
 ###
 Switched to branch 'dev'
 M       README.md
 
 ## method-2
-git checkout -b dev    #创建并切换到dev分支
+$ git checkout -b dev    #创建并切换到dev分支
 #Note 这里不能复现廖老师的实验，所以建议用上面的方法创建并切换至dev分支
 ## 更新：这种方式能够复现:
 $ git checkout -b test-br
@@ -357,7 +363,7 @@ $ git commit -m "branch test"
 ```
 #### 切换回主分支(main)
 ```powershell
-git checkout main
+$ git checkout main
 ```
 切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变:
 ![git-br-on-master](images/git-br-on-master.png)
@@ -368,7 +374,7 @@ git checkout main
 
 #### 合并分支(dev)到主分支(main)
 ```powershell
-git merge dev    # 合并指定分支到当前分支
+$ git merge dev    # 合并指定分支到当前分支
 
 ### 输出情况：
 Updating 5e1405a..3b3891f
@@ -381,9 +387,9 @@ Fast-forward
 ```
 
 ```powershell
-git checkout -b test-br
+$ git checkout -b test-br
 ## editing
-git merge test-br
+$ git merge test-br
 
 ### 输出情况：
 Updating 3b3891f..217a49c
@@ -424,26 +430,26 @@ branch 'test-br' set up to track 'origin/test-br'.
 #### 分支管理总结
 ```powershell
 # 查看分支
-git branch
+$ git branch
 
 # 创建分支
-git branch <name>
+$ git branch <name>
 
 # 切换分支
-git checkout <name>
+$ git checkout <name>
 # or
-git switch <name>
+$ git switch <name>
 
 # 创建+切换分支
-git checkout -b <name>
+$ git checkout -b <name>
 # or
-git switch -c <name>
+$ git switch -c <name>
 
 # 合并某分支到当前分支
-git merge <name>
+$ git merge <name>
 
 # 删除分支
-git branch -d <name>
+$ git branch -d <name>
 ```
 
 ### 解决冲突
@@ -1172,3 +1178,6 @@ $ git log --graph --pretty=oneline --abbrev-commit
 
 ## 标签管理
 
+### 创建标签
+
+### 管理标签
