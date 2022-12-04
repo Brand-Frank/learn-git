@@ -581,6 +581,34 @@ $ git log --graph --pretty=oneline --abbrev-commit
 Git分支十分强大，在团队开发中应该充分应用。合并分支时，加上`--no-ff`参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
 
 ### Bug分支
+
+软件开发中，bug就像家常便饭一样。有了bug就需要修复，在Git中，由于分支是如此的强大，所以，**每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除**。
+
+当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支`issue-101`来修复它，但是，等等，当前正在`dev`上进行的工作还没有提交：
+
+```powershell
+$ git status
+###
+On branch bug-fix
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+        modified:   hello-git.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+并不是你不想提交，而是工作只进行到一半，还没法提交，预计完成还需1天时间。但是，必须在两个小时内修复该bug，怎么办？幸好，Git还提供了一个**`stash`功能**，**可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作**：
+
+
+
+
+
+
+
+
+
+
 ### Feature分支
 ### 多人协作
 ### Rebase

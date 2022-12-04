@@ -7,3 +7,5 @@ Git tracks changes of files.
 Create a new branch is quick and simple.
 
 Try "--no-ff git commit"
+
+Try bug-fix and "git stash"
