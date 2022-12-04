@@ -791,6 +791,142 @@ $ git checkout -b multi origin/multi
 ```
 他就可以在`multi`上继续修改，然后，时不时地把`multi`分支`push`到远程
 
+```powershell
+# 以下操作均是其他人在修改
+$ echo "test multi person association." > env.txt
+$ git add env.txt
+$ git commit -m "add env"
+###
+[multi d3b70ad] add env
+ 1 file changed, 1 insertion(+)
+create mode 100644 env.txt
+
+## Note:其他人将本地multi分支的修改提交到远程的origin/multi分支上
+$ git push origin multi
+###
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 292 bytes | 292.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/Brand-Frank/learn-git.git
+   1dcef7f..d3b70ad  multi -> multi
+```
+
+碰巧你在本地multi分支进行了修改，并试图推送:
+```powershell
+# 本地修改并提交
+echo "Just a test." > env.txt
+$ git add env.txt
+$ git commit -m "add env (master)"
+###
+[multi f7b8694] add env (master)
+ 1 file changed, 1 insertion(+)
+create mode 100644 env.txt
+
+# 推送到远程仓库
+$ git push origin multi
+###
+To https://github.com/Brand-Frank/learn-git.git
+ ! [rejected]        multi -> multi (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Brand-Frank/learn-git.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+推送失败，因为你的小伙伴的最新提交和你试图推送的提交有冲突，解决办法也很简单，Git已经提示我们，先用`git pull`把最新的提交从`origin/multi`抓下来，然后，在本地合并，解决冲突，再推送：
+```powershell
+$ git pull
+###
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.    # 要指定pull的分支
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> multi
+
+```
+`git pull`也失败了，原因是**没有指定本地`multi`分支与远程`origin/multi`分支的链接**，根据提示，设置`multi`和`origin/multi`的链接：
+
+```powershell
+$ git branch --set-upstream-to=origin/multi multi
+branch 'multi' set up to track 'origin/multi'.
+```
+链接好后再次`pull`，会和其他人的修改产生冲突
+```powershell
+$ git pull
+Auto-merging env.txt
+CONFLICT (add/add): Merge conflict in env.txt
+Automatic merge failed; fix conflicts and then commit the result. # 需要先修复冲突然后提交修改
+
+# 若没有解决冲突就提交：
+$ git commit -m "pull sussess but a conflict"
+error: Committing is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+U       env.txt    # 报错env有问题
+```
+`env.txt`文件的内容为：
+```powershell
+<<<<<<< HEAD
+Just a test.
+=======
+test multi person association.
+>>>>>>> d3b70addc2e0c6040278a117948733c4a95155bc
+```
+修改后为：
+```powershell
+multi branch master << HEAD
+Just a test.
+
+test multi person association.
+>>> others
+```
+
+提交与推送：
+```powershell
+$ git add .\env.txt
+$ git commit -m "pull success but a conflict"
+[multi 58e44c3] pull success but a conflict
+
+$ git push origin multi
+
+```
+
+#### 小结
+- **多人协作的工作模式**
+> 首先，可以试图用`git push origin <branch-name>`推送自己的修改；
+>
+> 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并（建立分支推送链接）；
+>
+> 如果合并有冲突，则解决冲突，并在本地提交；
+>
+> 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
+>
+> 如果`git pull`提示`no tracking information`，则说明**本地分支和远程分支的链接关系没有创建**，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
+
+- 查看远程库信息，使用`git remote -v`；
+
+- 本地新建的分支如果不推送到远程，对其他人就是不可见的；
+
+- 从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交；
+
+- 在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致；
+
+- 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`；
+
+- 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
+
+
+
+
 ### Rebase
 
 
