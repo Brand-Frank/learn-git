@@ -444,7 +444,12 @@ git branch -d <name>
 ```
 
 ### 解决冲突
+1. **预先准备：**
+- 新建`feature1`分支(`git switch -c feature1`)
+- 修改`hello-git.txt`的最后一行(`Create a new branch is quick AND simple.`)
+- 在`feature1`分支上提交(`git add README.md` | `git commit -m "AND simple"`)
 
+2. 切换到 `main`分支
 
 ### 分支管理策略
 ### Bug分支
