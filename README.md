@@ -1288,5 +1288,102 @@ index d341acc..fd2b889 100644
 > - 命令`git tag -a <tag-name> -m "blablabla..."`可以指定标签信息；
 > - 命令`git tag`可以查看所有标签。
 
+- 合并当前(`tag-br`)编辑到`main`分支
+```powershell
+$ git merge tag-br
+###
+Updating e2ca180..e467f0f
+Fast-forward
+ README.md           |  92 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ images/git-tag.png  | Bin 0 -> 118690 bytes
+ images/tag-show.png | Bin 0 -> 118261 bytes
+ images/tag.png      | Bin 0 -> 89871 bytes
+ tag-id.txt          |   1 +
+ 5 files changed, 93 insertions(+)
+ create mode 100644 images/git-tag.png
+ create mode 100644 images/tag-show.png
+ create mode 100644 images/tag.png
+ create mode 100644 tag-id.txt
+```
 
 ### 管理标签
+```powershell
+$ git log --pretty=oneline --abbrev-commit
+###
+e467f0f (HEAD -> main, tag-br) Create git-tag
+ff21544 (tag: v1.0) add tag-id.
+e2ca180 Update README.md file.
+60adb3d (tag: v0.9) FORMAT: format with $
+ed8773e (origin/main, origin/HEAD) Finsh rebase and start tag.
+09c5d13 Add reflog file
+926332a Try rebase        # 将会增加一个演示用的标签
+57d1be8 Update README.md
+e099800 Add a image.
+1bc72ef (tag: v0.3) start rebase
+ba35363 Merge pull request #1 from Brand-Frank/multi
+```
+
+如果标签打错了，也可以删除：
+```powershell
+$ git tag -d v0.6
+Deleted tag 'v0.6' (was 926332a)
+```
+
+因为**创建的标签都只存储在本地，不会自动推送到远程**。所以，打错的标签可以在本地安全删除。
+如果要**推送某个标签到远程**，使用命令`git push origin <tag-name>`：
+```powershell
+$ git push origin v0.9
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 662 bytes | 662.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Brand-Frank/learn-git.git
+ * [new tag]         v0.9 -> v0.9
+```
+
+或者，**一次性推送全部尚未推送到远程的本地标签**：
+```powershell
+$ git tag
+###
+v0.3
+v0.9
+v1.0
+
+$ git push origin --tags
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 1.26 KiB | 1.26 MiB/s, done.
+Total 7 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 2 local objects.
+To https://github.com/Brand-Frank/learn-git.git
+ * [new tag]         v0.3 -> v0.3
+ * [new tag]         v1.0 -> v1.0
+```
+![remote-tag](images/remote-tag.png)
+
+
+如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+```powershell
+$ git tag -d v1.0
+Deleted tag 'v1.0' (was ff21544)
+```
+然后，从远程删除。删除命令也是push，但是格式如下：
+```powershell
+$ git push origin :refs/tags/v1.0
+To https://github.com/Brand-Frank/learn-git.git
+ - [deleted]         v1.0
+```
+要看看是否真的从远程库删除了标签，可以登陆GitHub查看。
+![tag-delete](images/tag-delete.png)
+
+
+- **小结：**
+  - 命令`git push origin <tag-name>`可以推送一个本地标签；
+  - 命令`git push origin --tags`可以推送全部未推送过的本地标签；
+  - 命令`git tag -d <tag-name>`可以删除一个本地标签；
+  - 命令`git push origin :refs/tags/<tag-name>`可以删除一个远程标签。
