@@ -5,3 +5,5 @@ Git has a mutable index called stage.
 Git tracks changes, but not files.
 Git tracks changes of files.
 Create a new branch is quick and simple.
+
+Try "--no-ff git commit"

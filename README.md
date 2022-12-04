@@ -10,7 +10,7 @@
   - [初始化版本库](#初始化版本库)
   - [添加文件](#添加文件)
   - [查看状态](#查看状态)
-  - [编辑文件，查看区别](#编辑文件，查看区别)
+  - [编辑文件并查看区别](#编辑文件并查看区别)
   - [再次提交与查看状态](#再次提交与查看状态)
   - [查看日志](#查看日志)
 
@@ -38,14 +38,7 @@
     - [切换分支的另一种方式](#切换分支的另一种方式(switch))
     - [分支管理总结](#分支管理总结)
   - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-    - [解决冲突](#解决冲突)
-  - [解决冲突](#解决冲突)
+  - [分支管理策略](#分支管理策略)
     - 
 
 
@@ -73,7 +66,7 @@ git add hello-git.txt
 git status
 ```
 
-### 编辑文件，查看区别
+### 编辑文件并查看区别
 ```powershell
 git diff    #需要在git add之前查看，add之后看不到不同之处
 ```
@@ -518,11 +511,31 @@ $ git log --graph --pretty=oneline --abbrev-commit
 * c1af378 TEST: delete test branch1
 * 217a49c (origin/test-br, test-br) Update README.md of test-br
 * 052935e FIX: 修复廖老师创建并切换分支不能复现的问题，git checkout -b test-b --> Switched to a new branch 'test-br'
+...
 ```
 
 7. 最后，删除`feature1`分支：`git branch -d feature1`
 
+**小结：**
+(1)当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+(2)解决冲突就是把Git合并失败的文件*手动编辑为我们希望的内容*，再提交。
+(3)用`git log --graph`命令可以看到**分支合并图**。
+
+
 ### 分支管理策略
+
+> 通常，合并分支时，如果可能，Git会用`Fast forward`模式，但**这种模式下，删除分支后，会丢掉分支信息**。
+>
+> 如果要强制禁用`Fast forward`模式，**Git就会在merge时生成一个新的`commit`**，这样，从分支历史上就可以看出分支信息。
+
+1. **预先准备**
+- 创建并切换到`dep`分支(`git switch -c dep` 或`git checkout -b dep`)
+- 修改`hello-git.txt`文件，提交一个新的`commit`(`git add hello-git.txt` | `git commit -m "add merge"`)
+
+
+
+
+
 ### Bug分支
 ### Feature分支
 ### 多人协作
