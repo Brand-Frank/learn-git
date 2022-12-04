@@ -1196,5 +1196,97 @@ $ git log --graph --pretty=oneline --abbrev-commit
 
 
 ### 创建标签
+```powershell
+$ git tag v1.0    # 给当前的commit打上一个标签，也就是一个快照
+
+$ git tag    # 查看所有标签
+v1.0
+```
+
+默认标签是打在最新提交的`commit`上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，需要找到历史提交的`commit id`，然后打上就可以了：
+```powershell
+$ git log --pretty=oneline --abbrev-commit
+###
+ff21544 (HEAD -> tag-br, tag: v1.0) add tag-id.
+e2ca180 (main) Update README.md file.
+60adb3d FORMAT: format with $        # 将给该版本打上标签
+ed8773e (origin/main, origin/HEAD) Finsh rebase and start tag.
+09c5d13 Add reflog file
+926332a Try rebase
+57d1be8 Update README.md
+e099800 Add a image.
+1bc72ef start rebase
+ba35363 Merge pull request #1 from Brand-Frank/multi
+7769cd6 (origin/multi, multi) NOTE: 工作区未提交就checkout到其他分支，会导致工作区的内容被覆盖掉
+```
+
+要给`60adb3d FORMAT: format with $`打上标签：
+```powershell
+$ git tag v0.9 60adb3d
+```
+![tag](images/tag.png)
+
+- **注意：**标签不是按照时间顺序列出，而是按照字母排序的。可以用`git show <tag-name>`查看标签信息：
+
+```powershell
+$ git show v0.9
+###
+commit 60adb3dbad47fde5d2da004455d8b127d9e10530 (tag: v0.9)
+Author: Brand-Frank <3069584010@qq.com>
+Date:   Sun Dec 4 15:58:20 2022 +0800
+
+    FORMAT: format with $
+
+diff --git a/README.md b/README.md
+index 2b765cd..79756e9 100644
+--- a/README.md
++++ b/README.md
+@@ -50,6 +50,8 @@
+       - [小结](#小结)
+
+...
+```
+还可以**创建带有说明的标签**，用`-a`**指定标签名**，`-m`**指定说明文字**：
+```powershell
+$ git tag -a v0.3 -m "version 0.3 released -> rebase" 1bc72ef
+$ git show v0.3
+###
+tag v0.3
+Tagger: Brand-Frank <3069584010@qq.com>
+Date:   Sun Dec 4 16:20:23 2022 +0800
+
+version 0.3 released -> rebase
+
+commit 1bc72ef66d3fb9d107be26ba129256f26d5621c7 (tag: v0.3)
+Author: Brand-Frank <3069584010@qq.com>
+Date:   Sun Dec 4 15:04:23 2022 +0800
+
+    start rebase
+
+diff --git a/README.md b/README.md
+index d341acc..fd2b889 100644
+--- a/README.md
++++ b/README.md
+@@ -41,6 +41,13 @@
+   - [分支管理策略](#分支管理策略)
+   - [Bug分支](#Bug分支)
+   - [Feature分支](#Feature分支)
++  - [多人协作](#多人协作)
++    - [查看远程仓库的信息](#查看远程仓库的信息)
++    - [推送分支](#推送分支)
++    - [抓取分支](#抓取分支)
++    - [小结](#小结)
++  - [Rebase](#Rebase)
++
+```
+![git-tag](images/git-tag.png)
+
+- **注意：**标签总是和某个`commit`挂钩。如果这个`commit`既出现在`main`分支，又出现在`dev`分支，那么在这两个分支上都可以看到这个标签。
+
+- **小结：**
+> - 命令`git tag <tag-name>`用于新建一个标签，默认为`HEAD`，也可以指定一个`commit id`；
+> - 命令`git tag -a <tag-name> -m "blablabla..."`可以指定标签信息；
+> - 命令`git tag`可以查看所有标签。
+
 
 ### 管理标签
