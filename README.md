@@ -447,9 +447,80 @@ git branch -d <name>
 1. **预先准备：**
 - 新建`feature1`分支(`git switch -c feature1`)
 - 修改`hello-git.txt`的最后一行(`Create a new branch is quick AND simple.`)
-- 在`feature1`分支上提交(`git add README.md` | `git commit -m "AND simple"`)
+- 在`feature1`分支上提交(`git add hello-git.txt` | `git commit -m "AND simple"`)
 
-2. 切换到 `main`分支
+2. 切换到 `main`分支(`git switch main`)
+3. 修改`hello-git.txt`的最后一行(`Create a new branch is quick & simple.`)
+4. 在`main`分支上提交(`git add hello-git.txt` | `git commit -m "& simple"`)
+
+现在，`main`和`feature1`分支各自都有新的提交，变成了这样：
+![git-br-feature1](images/git-br-feature1.png)
+
+在这种情况下，git无法执行快速合并，只能试图把各自的修改合并起来，但这种合并就可能产生冲突：
+```powershell
+$ git merge feature1    # 合并feature1分支到主分支
+
+### 输出情况：
+Auto-merging hello-git.txt
+CONFLICT (content): Merge conflict in hello-git.txt
+Automatic merge failed; fix conflicts and then commit the result.    #必须手动解决冲突后再提交
+
+# 查看冲突
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+        modified:   .cspell/custom-dictionary-workspace.txt
+        modified:   README.md
+
+Unmerged paths:        # 这部分并未合并，需要手动解决冲突后再提交
+  (use "git add <file>..." to mark resolution)
+        both modified:   hello-git.txt
+
+### 冲突情况如下：
+...
+<<<<<<< HEAD
+Create a new branch is quick & simple.
+=======
+Create a new branch is quick AND simple.
+>>>>>>> feature1
+```
+![git-conflict](images/git-conflict.png)
+
+5. 修改后做如下保存：
+
+```powershell
+Create a new branch is quick and simple.
+$ git add hello-git.txt
+$ git commit -m "conflict fixed
+```
+现在，`main`分支和`feature1`分支变成了如下图所示：
+![git-br-conflict-merged](images/git-br-conflict-merged.png)
+
+6. 使用带参数的`git log`也可以看到分支的合并情况
+```powershell
+$ git log --graph --pretty=oneline --abbrev-commit
+
+*   9c6cb92 (HEAD -> main) conflict fixed    # 解决冲突时点的提交
+|\
+| * ac558db (feature1) AND simple    # feature分支
+* | 3629d7b &simple    # main分支
+|/
+* c6b1b53 (origin/main, origin/HEAD) QA: GitHub仓库页面上的那些东西是干什么用的？
+* d7385ad Notice: 从分支上提交代码到远端仓库的注意事项 #dev分支上传到远程仓库
+* 221b256 have a rest
+* c1af378 TEST: delete test branch1
+* 217a49c (origin/test-br, test-br) Update README.md of test-br
+* 052935e FIX: 修复廖老师创建并切换分支不能复现的问题，git checkout -b test-b --> Switched to a new branch 'test-br'
+```
+
+7. 最后，删除`feature1`分支：`git branch -d feature1`
 
 ### 分支管理策略
 ### Bug分支
