@@ -833,7 +833,7 @@ To https://github.com/Brand-Frank/learn-git.git
    1dcef7f..d3b70ad  multi -> multi
 ```
 
-碰巧你在本地multi分支进行了修改，并试图推送:
+碰巧你在本地`multi`分支进行了修改，并试图推送:
 ```powershell
 # 本地修改并提交
 echo "Just a test." > env.txt
